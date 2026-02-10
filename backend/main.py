@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from script_api import fetch_profile_data
 from insights import generate_insights
 from fastapi.middleware.cors import CORSMiddleware
-
+import os
 
 app = FastAPI()
 
@@ -35,3 +35,6 @@ def compare_profiles(user: str, competitor: str):
         "competitor": competitor_data,
         "insights":insights
     }
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=int(os.environ.get("PORT", 8000)))
